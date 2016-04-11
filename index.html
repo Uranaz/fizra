@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Fizkultura</title>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" type="text/css" href="160407_fizra-style.css"/>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+</head>
+<body>
+  <!--Header-->
+  <div id=header>
+    <div id=container>
+      <div id=logo>
+        <img src="FLogo70.svg"/>
+      </div>
+      <div id=menu>
+      <ul>
+        <li><strong>ФИЗКУЛЬТУРА</strong></li>
+        <li id=btnabout><strong>О проекте</strong></li>
+        <li id=btncoach><strong>Ищем тренеров</strong></li>
+      </ul>
+      </div>
+      <div id=social>
+        <a href="https://www.facebook.com/fizkulturaostankino/" target="_blank" title="страница на facebook">
+          <img src="F_logo_24.svg"/>
+        </a>
+        <a href="https://vk.com/fizkulturaostankino" target="_blank" title="страница во Вконтакте">
+          <img src="B_logo_24.svg"/>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div id=abouttext>
+    <div class=closebtn><img src="closeBtn.svg"/></div>
+    <h5>Парк - наш фитнес-центр!</h5>
+      <p>Практически всем жителям современного большого города необходимо регулярно упражняться для поддержания здоровья и хорошей физической формы. Лучше всего это делать на свежем воздухе в близлежащем парке, в хорошей компании и под руководством опытного тренера.</p>
+      <p>Любой парк - это фитнес-центр. Здесь есть «аналоговые беговые дорожки», тренажеры (турники, брусья), травяные «коврики» для йоги. Не хватает только расписания групповых тренировок с инструкторами. Этому и посвящен проект. На карте вы можете найти информацию о возможностях для тренировок в парке (пока только района Останкино), кликайте маркеры.</p>
+      <p>Тренеры и инструкторы, выходите в ближайший к вам парк, предлагайте свои услуги. Нам всем не хватает уроков физкультуры. Зайдите в раздел «Ищем тренеров» и узнайте, как проект поможет вам найти подопечных.</p>
+      <p class=end>Автор проекта –<a href="https://www.facebook.com/yuri.nazarov.50" target="_blank">Юрий Назаров</a></p>
+  </div>
+  <div id=coachtext>
+    <div class=closebtn><img src="closeBtn.svg"/></div>
+    <h5>Привет!</h5>
+      <p>Если ты тренер по любому виду спорта, которым можно заниматься в парке или на спортплощадке, и хочешь организовать собственные групповые тренировки, приглашаем к участию в проекте.</p>
+      <p>Как это сделать?</p>
+      <p>1. Определись с условиями: тип тренировок (бег, офп, йога, ...), требуемый уровень подготовки, точное место проведения, расписание, стоимость, дата начала;</p>
+      <p>2. Присылай все это на почту mail@fizra.ru (можно написать на Facebook или Вконтакте) вместе с кратким резюме в свободной форме (спортивный и тренерский опыт, достижения, образование, ...);</p>
+      <p>3. Все! Мы ставим на карте маркер с информацией о твоих тренировках, пишем о тебе в соцсетях, можешь выходить и тренировать людей!</p>
+      <p>Все это бесплатно, но с определенными требованиями: тренировки должны быть строго регулярными, и ты должен нам сообщать количество участников каждой тренировки для сбора статистики.</p>
+      <p>Экспериментальная площадка проекта - парки района Останкино, но вообще, никаких географических рамок у проекта нет.</p>
+      <h5 class=end>Удачи!</h5>
+  </div>
+  <div id='map'></div>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script>
+  var mymap = L.map('map').setView([55.829573, 37.619057], 14);
+
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    minZoom: 13,
+    id: 'mapbox.emerald',
+    accessToken: 'pk.eyJ1IjoidXJhbmF6IiwiYSI6ImNpaTM1Y29pdjAwMnd2bm0yMjhvN2R5YWQifQ.0lB3sz08vtttzGY6t-cPcw'
+}).addTo(mymap);
+// Fizra Icon
+var fizraIcon = L.Icon.extend({
+    options: {
+        iconUrl: 'fmarker.png',
+        shadowUrl: 'fmarkershadow.png',
+        iconSize:     [20, 32],
+        shadowSize:   [20, 32],
+        iconAnchor:   [10, 32],
+        shadowAnchor: [4, 32],
+        popupAnchor:  [0, -32]
+    }
+});
+
+var myIcon = new fizraIcon();
+
+// Others Icon
+var othersIcon = L.Icon.extend({
+    options: {
+        iconUrl: 'othersmarker.png',
+        shadowUrl: 'fmarkershadow.png',
+        iconSize:     [20, 32],
+        shadowSize:   [20, 32],
+        iconAnchor:   [10, 32],
+        shadowAnchor: [4, 32],
+        popupAnchor:  [0, -32]
+    }
+});
+
+var theirIcon = new othersIcon();
+
+// Place Icon
+var placeIcon = L.Icon.extend({
+    options: {
+        iconUrl: 'placemarker.png',
+        iconSize:     [16, 16],
+        iconAnchor:   [8, 8],
+        popupAnchor:  [0, -8]
+    }
+});
+
+var pointIcon = new placeIcon();
+
+L.marker([55.82484, 37.61696], {icon: myIcon}).addTo(mymap).bindPopup(
+  "<b>Иван Иванов</b><br>Бег и ОФП<br>Среда - 7:30<br>Суббота - 11:00"
+);
+
+L.marker([55.829314, 37.627696], {icon: theirIcon}).addTo(mymap).bindPopup(
+  "<b>Reebok ПАРКИ</b><br>www.reebokinparks.com"
+);
+
+L.marker([55.83822, 37.6392], {icon: theirIcon}).addTo(mymap).bindPopup(
+  "<b>adidas runclub > moscow Лосиный</b><br>adidas-running.ru/runclub"
+);
+
+L.marker([55.83846, 37.61224], {icon: pointIcon}).addTo(mymap).bindPopup(
+  "<b>Спортплощадка</b><br>турники, брусья"
+);
+
+L.marker([55.83799, 37.6392], {icon: pointIcon}).addTo(mymap).bindPopup(
+  "<b>Стадион 'Искра'</b>"
+);
+
+L.marker([55.82588, 37.60684], {icon: pointIcon}).addTo(mymap).bindPopup(
+  "<b>Стадион и спортплощадки</b><br>турники, брусья, тренажеры"
+);
+
+//Lat Lan
+/*var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(mymap);
+}
+
+mymap.on('click', onMapClick);*/
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="fizra.js"></script>
+</body>
+</html>

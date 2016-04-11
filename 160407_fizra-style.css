@@ -1,0 +1,108 @@
+body { margin:0; padding:0; font-family: sans-serif;}
+div { display: block; }
+#header {
+	position: absolute;
+  width: 100%;
+  height: 50px;
+	margin-top: 20px;
+  z-index: 3;
+	}
+#container {
+	position: relative;
+	width: 700px;
+	height: 50px;
+	margin: auto;
+}
+#logo {
+	position: relative;
+	display: inline-block;
+	left: -25px;
+	top:-8px;
+  z-index: 4;
+}
+#menu {
+	position: relative;
+	display: inline-block;
+	left: -40px;
+	top: -40px;
+}
+ul {
+	margin: 0px;
+	padding: 0px;
+}
+li {
+	display: inline-block;
+	color: #FF4800;
+	padding: 14px 30px;
+	border: 2px solid #FF4800;
+	vertical-align: middle;
+}
+li:first-child {
+	border: none;
+	font-size: 20px;
+}
+#btnabout:hover {
+	background-color: #FF4800;
+	color: #ffffff;
+	cursor: pointer;
+}
+#btncoach:hover {
+	background-color: #FF4800;
+	color: #ffffff;
+	cursor: pointer;
+}
+.active {
+	background-color: #FF4800;
+	color: #ffffff;
+}
+#social {
+	position: relative;
+	display: inline-block;
+	top: -35px;
+	left: -20px;
+}
+a {
+	padding: 0px 10px;
+	color: black;
+}
+#abouttext {
+	position: relative;
+	display: none;
+	width: 630px;
+	height: auto;;
+	background-color: #ffffff;
+	margin: auto;
+	z-index: 2;
+	top:90px;
+	padding: 10px;
+}
+.closebtn {
+	float: right;
+	cursor: pointer;
+}
+#coachtext {
+	position: relative;
+	display: none;
+	width: 630px;
+	height: auto;
+	background-color: #ffffff;
+	margin: auto;
+	z-index: 2;
+	top:90px;
+	padding: 10px;
+}
+h5 {
+	margin: 18px;
+	padding: 0;
+	font-size: 14px;
+}
+p {
+	margin: 18px;
+	padding: 0;
+	font-size: 14px;
+}
+.end {
+	text-align: right;
+}
+
+#map { position:absolute; top:0; bottom:0; left:0; width:100%; z-index: 1;}

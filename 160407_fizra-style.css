@@ -61,12 +61,9 @@ li:first-child {
 	top: -35px;
 	left: -20px;
 }
-a {
+.social {
 	padding: 0px 8px;
 	color: black;
-}
-p a {
-	padding: 0px;
 }
 #abouttext {
 	position: relative;

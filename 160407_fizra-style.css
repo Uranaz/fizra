@@ -65,6 +65,9 @@ a {
 	padding: 0px 8px;
 	color: black;
 }
+p a {
+	padding: 0px;
+}
 #abouttext {
 	position: relative;
 	display: none;
